@@ -4,19 +4,19 @@
 // it an empty string. It'd be nicer if it explained what the problem was,
 // instead of just sometimes returning `None`. Thankfully, Rust has a similar
 // construct to `Result` that can be used to express error conditions. Let's use
-// it!
+// it!qui
 //
 // Execute `rustlings hint errors1` or use the `hint` watch subcommand for a
 // hint.
 
 // I AM NOT DONE
 
-pub fn generate_nametag_text(name: String) -> Option<String> {
+pub fn generate_nametag_text(name: String) -> Result<String, String> {
     if name.is_empty() {
         // Empty names aren't allowed.
-        None
+        Err("`name` was empty; it must be nonempty.".into())
     } else {
-        Some(format!("Hi! My name is {}", name))
+        Ok(format!("Hi! My name is {}", name))
     }
 }
 
@@ -37,7 +37,9 @@ mod tests {
         assert_eq!(
             generate_nametag_text("".into()),
             // Don't change this line
+
             Err("`name` was empty; it must be nonempty.".into())
+
         );
     }
 }
